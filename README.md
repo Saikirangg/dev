@@ -1,3 +1,2 @@
-## Django Template
-
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/GB6Eki?referralCode=U5zXSw)
+# GG_Crm Dev Env
+http://ec2-15-206-79-135.ap-south-1.compute.amazonaws.com:8000/

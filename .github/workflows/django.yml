@@ -1,0 +1,57 @@
+name: Django CI
+
+on:
+  push:
+    branches: [ "dev_checkout" ]
+
+
+jobs:
+  build:
+    name: run on ubuntu
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+      matrix:
+        python-version: [3.9]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Dependencies
+      run: |
+        sudo apt-get -y update
+        sudo apt-get -y install zip
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        zip -r code.zip .
+    - name: Archiving Artifacts
+      uses: actions/upload-artifact@v3
+      with: 
+        name: code
+        path: code.zip
+    - name: Run Tests
+      run: |
+        python manage.py test
+  deploy:    
+    name: Deploy Server
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: download code to temp deployment server
+        uses: actions/download-artifact@v3
+        with: 
+          name: code
+      - shell: bash
+        env:
+          MYKEY: ${{ secrets.AWS_PEM }}
+        run: |
+          touch aws_pem.pem
+          expr "$MYKEY" > aws_pem.pem
+          chmod 400 aws_pem.pem
+          cat aws_pem.pem
+          ls -l
+          scp -o StrictHostKeyChecking=no -i "aws_pem.pem" code.zip ubuntu@ec2-15-206-79-135.ap-south-1.compute.amazonaws.com:/home/ubuntu/crm/
+          ssh -o StrictHostKeyChecking=no -i "aws_pem.pem" ubuntu@ec2-15-206-79-135.ap-south-1.compute.amazonaws.com /home/ubuntu/deploy.sh
