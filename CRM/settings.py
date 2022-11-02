@@ -61,6 +61,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'CRM.urls'
 CORS_ORIGIN_ALLOW_ALL = True
+CSRF_TRUSTED_ORIGINS = ['https://bsjgoxudjb.execute-api.us-east-2.amazonaws.com']
 
 TEMPLATES = [
     {
