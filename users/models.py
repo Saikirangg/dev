@@ -2,10 +2,10 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-
+from django.views.decorators.csrf import csrf_exempt
 
 class CustomAccountManager(BaseUserManager):
-
+    @csrf_exempt
     def create_superuser(self, email, user_name, password, **other_fields):
 
         other_fields.setdefault('is_staff', True)
@@ -21,6 +21,7 @@ class CustomAccountManager(BaseUserManager):
 
         return self.create_user(email, user_name, password, **other_fields)
 
+    @csrf_exempt    
     def create_user(self, email, user_name, password, **other_fields):
 
         if not email:
