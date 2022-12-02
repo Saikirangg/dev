@@ -26,6 +26,8 @@ urlpatterns = [
     path('order/', include('order.urls')),
     path('customers/', include('Customers.urls')),
     path('admin/', admin.site.urls),
-    path('calls/', include('calls.urls')),  
+    path('calls/', include('calls.urls')), 
+    path('api/locus/', include(('locus.urls', 'locus'),
+                                  namespace='locus')), 
 
 ]

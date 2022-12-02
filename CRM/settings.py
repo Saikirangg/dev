@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'Customers',
     'users',
     'calls',
+    'locus',
 
 ]
 
