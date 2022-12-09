@@ -32,10 +32,10 @@ class FileUpload(models.Model):
 
     owner = models.CharField(max_length=250)
     file = models.FileField(
-        upload_to=settings.VIDEO_MEDIA_URL,
+        upload_to=settings.STATIC_URL,
         storage=FileSystemStorage(
             location=settings.VIDEO_MEDIA_URL,
-            base_url=os.path.join(settings.MEDIA_URL, settings.VIDEO_MEDIA_URL)
+            base_url=os.path.join(settings.MEDIA_URL, settings.STATIC_URL)
         ))
     # models.FileField(upload_to='csv_uploads/%y/%m')
     created = models.DateTimeField(auto_now_add=True)
