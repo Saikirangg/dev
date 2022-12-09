@@ -1,6 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+import os
 
+from django.core.files.storage import FileSystemStorage
+from django.db import models
+
+from CRM import settings
 
 class Patient(models.Model):
     """This Model represents a Patient class.
