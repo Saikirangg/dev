@@ -93,11 +93,18 @@ DATABASES = {
     # },
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'database_crm',
-        'USER': 'database_gg_crm',
+        'NAME': 'postgres',
+        'USER': 'postgres',
         'PASSWORD': 'Crmpostgres123',
-        'HOST': 'database-crm.cazl4vulkacd.ap-south-1.rds.amazonaws.com',
+        'HOST': '34.93.233.174',
         'PORT': '5432',
+        # aws connection
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': 'database_crm',
+        # 'USER': 'database_gg_crm',
+        # 'PASSWORD': 'Crmpostgres123',
+        # 'HOST': 'database-crm.cazl4vulkacd.ap-south-1.rds.amazonaws.com',
+        # 'PORT': '5432',
     }
 }
 # Password validation
